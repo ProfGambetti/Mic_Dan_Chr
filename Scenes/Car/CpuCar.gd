@@ -64,6 +64,12 @@ func update_waypoint() -> void:
 			_allowed_max_speed,
 			_next_waypoint.next_waypoint.radius_factor
 		)
+		
+		# frena di più nelle curve strette
+		if _next_waypoint.radius_factor < 0.3:
+			_target_speed *= 0.67
+		elif _next_waypoint.radius_factor < 0.5:
+			_target_speed *= 0.9
 		#print (car_number, " ", _target_speed)
 
 
