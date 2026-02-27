@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5bx7onudqhnd"]
+
+[ext_resource type="Script" uid="uid://dpbxr0ye8wosv" path="res://Scenes/RaceController/RaceController.gd" id="1_i2yoe"]
+
+[node name="RaceController" type="Node"]
+script = ExtResource("1_i2yoe")
+total_laps = null

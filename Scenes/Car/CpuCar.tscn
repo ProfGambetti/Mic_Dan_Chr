@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://djyaytjfa6yp5"]
+
+[ext_resource type="PackedScene" uid="uid://cg1mlwxhlujj2" path="res://Scenes/Car/Car.tscn" id="1_dy7ph"]
+[ext_resource type="Script" uid="uid://bir06hbi6ffe5" path="res://Scenes/Car/CpuCar.gd" id="2_cv55x"]
+[ext_resource type="Texture2D" uid="uid://blv5vu5ryjp8t" path="res://Assets/Images/Dot.png" id="3_or3o6"]
+
+[node name="CpuCar" instance=ExtResource("1_dy7ph")]
+script = ExtResource("2_cv55x")
+debug = true
+skill = 0.3
+waypoint_distance = 20.0
+max_top_speed_limit = 350.0
+min_top_speed_limit = 300.0
+max_bottom_speed_limit = 120.0
+min_bottom_speed_limit = 80.0
+speed_reaction = 2.0
+
+[node name="TargetSprite" type="Sprite2D" parent="." index="3"]
+modulate = Color(1, 0.21568628, 0.1882353, 1)
+top_level = true
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("3_or3o6")
+
+[node name="DeviationTimer" type="Timer" parent="." index="7"]
+autostart = true
+
+[connection signal="timeout" from="DeviationTimer" to="." method="_on_deviation_timer_timeout"]

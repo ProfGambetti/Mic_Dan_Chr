@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://d2p1jqmj5s1m4"]
+
+[ext_resource type="AudioStream" uid="uid://c58agys6x8rgl" path="res://Assets/Sounds/8_Bit_Nostalgia.mp3" id="1_5n163"]
+[ext_resource type="Script" uid="uid://b1brna4ifiggv" path="res://Scenes/Ui/Main/Main.gd" id="1_rc6ju"]
+[ext_resource type="PackedScene" uid="uid://ba2f8ysmg127v" path="res://Scenes/Ui/TrackSelector/TrackSelector.tscn" id="2_ckqhe"]
+[ext_resource type="Resource" uid="uid://bff2huhsgo1nr" path="res://resources/Indy.tres" id="3_6mjsa"]
+[ext_resource type="Resource" uid="uid://btt248ya1oens" path="res://resources/Monza.tres" id="4_rc6ju"]
+[ext_resource type="Resource" uid="uid://bg73474s4honw" path="res://resources/Monaco.tres" id="5_imu5v"]
+[ext_resource type="Resource" uid="uid://bkv20heb5yhoe" path="res://resources/Silverstone.tres" id="6_a0fht"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rc6ju")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_5n163")
+volume_db = -12.0
+autoplay = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05490196, 0.05490196, 0.07450981, 1)
+
+[node name="MC" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="GridContainer" type="GridContainer" parent="MC"]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 2
+
+[node name="TrackSelector" parent="MC/GridContainer" instance=ExtResource("2_ckqhe")]
+layout_mode = 2
+track_info = ExtResource("3_6mjsa")
+
+[node name="TrackSelector2" parent="MC/GridContainer" instance=ExtResource("2_ckqhe")]
+layout_mode = 2
+track_info = ExtResource("4_rc6ju")
+
+[node name="TrackSelector3" parent="MC/GridContainer" instance=ExtResource("2_ckqhe")]
+layout_mode = 2
+track_info = ExtResource("5_imu5v")
+
+[node name="TrackSelector4" parent="MC/GridContainer" instance=ExtResource("2_ckqhe")]
+layout_mode = 2
+track_info = ExtResource("6_a0fht")

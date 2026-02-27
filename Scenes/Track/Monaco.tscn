@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dd2kbvumugkcs"]
+
+[ext_resource type="PackedScene" uid="uid://gqdstw6n42rk" path="res://Scenes/Track/Track.tscn" id="1_xxpom"]
+[ext_resource type="Texture2D" uid="uid://2msta3ane5h5" path="res://Assets/Images/WaterBg.png" id="2_16g27"]
+[ext_resource type="Texture2D" uid="uid://c1m5vk3rejca7" path="res://Assets/Images/Monaco.png" id="3_r7so3"]
+
+[sub_resource type="Curve2D" id="Curve2D_sqois"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 683, 508, 5.3240013, 62.557007, -1.3310013, -87.846016, 824, 504, -38.599003, 79.86, 49.247005, -82.522, 755, 333, -19.965002, 91.839005, 19.965002, -91.839005, 980, 264, 138.42401, -54.571003, -91.83901, 38.599003, 713, 82, 86.51501, 7.9860005, -86.51501, -7.9860005, 528, 239, 90.508, -29.282003, -59.895004, 6.6550007, 329, 128, 66.55, -102.48701, -27.951004, 74.536, 155, 296, -18.633999, -53.24, 49.247, 66.55, 156, 448, -158.389, 0, 183.67801, 11.979001, 449, 472, 0, 0, 0, 0, 683, 508)
+}
+point_count = 11
+
+[node name="Monaco" instance=ExtResource("1_xxpom")]
+
+[node name="Background" parent="." index="0"]
+texture = ExtResource("2_16g27")
+
+[node name="TrackImage" parent="." index="1"]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_r7so3")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TrackCollision" index="0"]
+polygon = PackedVector2Array(344, 179, 309, 202, 273, 230, 239, 265, 212, 304, 196, 336, 189, 366, 189, 398, 194, 415, 209, 423, 267, 422, 327, 411, 393, 402, 441, 397, 491, 398, 560, 410, 682, 448, 774, 482, 741, 462, 707, 435, 685, 409, 666, 373, 661, 345, 664, 316, 669, 292, 686, 269, 707, 251, 730, 239, 763, 231, 805, 233, 850, 238, 908, 248, 942, 251, 910, 231, 874, 209, 819, 180, 776, 161, 724, 142, 688, 171, 623, 241, 582, 286, 552, 313, 520, 332, 499, 333, 479, 329, 460, 321, 432, 298, 401, 261, 371, 219)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="TrackCollision" index="1"]
+polygon = PackedVector2Array(498, 186, 458, 127, 419, 76, 378, 45, 339, 47, 266, 84, 195, 134, 149, 178, 102, 238, 82, 286, 70, 328, 64, 392, 71, 440, 90, 480, 116, 512, 168, 540, 228, 549, 321, 538, 400, 524, 473, 520, 548, 532, 787, 612, 839, 623, 886, 623, 932, 600, 950, 575, 962, 538, 956, 498, 936, 458, 895, 421, 799, 353, 896, 369, 953, 372, 985, 369, 1036, 353, 1060, 325, 1073, 296, 1079, 260, 1064, 208, 1015, 153, 911, 89, 806, 41, 725, 19, 685, 23, 640, 51, 594, 92, 502, 190, 512, -45, 1242, -49, 1226, 701, -77, 700, -74, -43, 489, -48)
+
+[node name="TrackPath" parent="." index="3"]
+curve = SubResource("Curve2D_sqois")
+
+[node name="CpuCar" parent="CarsHolder" index="0"]
+skill = 0.2
+
+[node name="Music" parent="." index="11"]
+volume_db = 3.322

@@ -1,0 +1,98 @@
+[gd_scene load_steps=12 format=3 uid="uid://gqdstw6n42rk"]
+
+[ext_resource type="Script" uid="uid://e256etg8nsqi" path="res://Scenes/Track/Track.gd" id="1_0do6f"]
+[ext_resource type="Texture2D" uid="uid://c1m5vk3rejca7" path="res://Assets/Images/Monaco.png" id="1_fv5kj"]
+[ext_resource type="Texture2D" uid="uid://2msta3ane5h5" path="res://Assets/Images/WaterBg.png" id="1_okhpi"]
+[ext_resource type="PackedScene" uid="uid://dknnoxlghw3qv" path="res://Scenes/TrackProcessor/TrackProcessor.tscn" id="5_2lgdg"]
+[ext_resource type="PackedScene" uid="uid://1olejsy54lgw" path="res://Scenes/OilDropper/OilDropper.tscn" id="5_vfgym"]
+[ext_resource type="Texture2D" uid="uid://dec3bup5l0rha" path="res://Assets/Images/FinishLine.png" id="6_wtm8k"]
+[ext_resource type="PackedScene" uid="uid://cg7p815f0b5w3" path="res://Scenes/Verification/Verification.tscn" id="7_6d5m8"]
+[ext_resource type="PackedScene" uid="uid://dj72m1ivs772h" path="res://Scenes/Car/PlayerCar.tscn" id="8_2lgdg"]
+[ext_resource type="PackedScene" uid="uid://b5bx7onudqhnd" path="res://Scenes/RaceController/RaceController.tscn" id="8_pxc04"]
+
+[sub_resource type="Curve2D" id="Curve2D_0do6f"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 683, 508, 5.3240013, 62.557007, -1.3310013, -87.846016, 824, 504, -38.599003, 79.86, 49.247005, -82.522, 755, 333, -19.965002, 91.839005, 19.965002, -91.839005, 980, 264, 138.42401, -54.571003, -91.83901, 38.599003, 713, 82, 86.51501, 7.9860005, -86.51501, -7.9860005, 528, 239, 90.508, -29.282003, -59.895004, 6.6550007, 329, 128, 66.55, -102.48701, -27.951004, 74.536, 155, 296, -18.633999, -53.24, 49.247, 66.55, 156, 448, -158.389, 0, 183.67801, 11.979001, 449, 472, 0, 0, 0, 0, 683, 508)
+}
+point_count = 11
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6d5m8"]
+size = Vector2(126.88405, 6.5614777)
+
+[node name="Track" type="Node"]
+script = ExtResource("1_0do6f")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(573, 327)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("1_okhpi")
+
+[node name="TrackImage" type="Sprite2D" parent="."]
+position = Vector2(575, 326)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_fv5kj")
+
+[node name="TrackCollision" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TrackCollision"]
+polygon = PackedVector2Array(344, 179, 309, 202, 273, 230, 239, 265, 212, 304, 196, 336, 189, 366, 189, 398, 194, 415, 209, 423, 267, 422, 327, 411, 393, 402, 441, 397, 491, 398, 560, 410, 682, 448, 774, 482, 741, 462, 707, 435, 685, 409, 666, 373, 661, 345, 664, 316, 669, 292, 686, 269, 707, 251, 730, 239, 763, 231, 805, 233, 850, 238, 908, 248, 942, 251, 910, 231, 874, 209, 819, 180, 776, 161, 724, 142, 688, 171, 623, 241, 582, 286, 552, 313, 520, 332, 499, 333, 479, 329, 460, 321, 432, 298, 401, 261, 371, 219)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="TrackCollision"]
+polygon = PackedVector2Array(498, 186, 458, 127, 419, 76, 378, 45, 339, 47, 266, 84, 195, 134, 149, 178, 102, 238, 82, 286, 70, 328, 64, 392, 71, 440, 90, 480, 116, 512, 168, 540, 228, 549, 321, 538, 400, 524, 473, 520, 548, 532, 787, 612, 839, 623, 886, 623, 932, 600, 950, 575, 962, 538, 956, 498, 936, 458, 895, 421, 799, 353, 896, 369, 953, 372, 985, 369, 1036, 353, 1060, 325, 1073, 296, 1079, 260, 1064, 208, 1015, 153, 911, 89, 806, 41, 725, 19, 685, 23, 640, 51, 594, 92, 502, 190, 512, -45, 1242, -49, 1226, 701, -77, 700, -74, -43, 489, -48)
+
+[node name="TrackPath" type="Path2D" parent="."]
+position = Vector2(1, 0)
+curve = SubResource("Curve2D_0do6f")
+
+[node name="OilDropper" parent="TrackPath" node_paths=PackedStringArray("oil_container") instance=ExtResource("5_vfgym")]
+position = Vector2(683, 508)
+rotation = 0.3806679
+debug = false
+oil_container = NodePath("../../OilContainer")
+drop_time_var = Vector2(300, 500)
+
+[node name="TrackProcessor" parent="TrackPath" instance=ExtResource("5_2lgdg")]
+position = Vector2(683, 508)
+rotation = 0.3806679
+
+[node name="OilContainer" type="Node" parent="."]
+
+[node name="StartLine" type="Area2D" parent="."]
+position = Vector2(691, 515)
+rotation = -1.3307519
+collision_layer = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="StartLine"]
+scale = Vector2(1, 0.45)
+texture = ExtResource("6_wtm8k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartLine"]
+position = Vector2(0.088378906, -0.12908936)
+shape = SubResource("RectangleShape2D_6d5m8")
+
+[node name="VerificationsHolder" type="Node" parent="."]
+
+[node name="Verification" parent="VerificationsHolder" instance=ExtResource("7_6d5m8")]
+position = Vector2(775, 416.0001)
+rotation = -0.43016
+
+[node name="Verification2" parent="VerificationsHolder" instance=ExtResource("7_6d5m8")]
+position = Vector2(594, 176)
+rotation = 0.65541977
+
+[node name="Verification3" parent="VerificationsHolder" instance=ExtResource("7_6d5m8")]
+position = Vector2(139.99998, 312)
+rotation = 0.48919514
+
+[node name="CarsHolder" type="Node" parent="."]
+
+[node name="PlayerCar" parent="CarsHolder" instance=ExtResource("8_2lgdg")]
+position = Vector2(262, 503)
+
+[node name="RaceController" parent="." instance=ExtResource("8_pxc04")]
+
+[node name="WaypointHolder" type="Node" parent="."]
+
+[connection signal="area_entered" from="TrackCollision" to="." method="_on_track_collision_area_entered"]
+[connection signal="area_entered" from="StartLine" to="." method="_on_start_line_area_entered"]

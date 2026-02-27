@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://ba2f8ysmg127v"]
+
+[ext_resource type="Script" uid="uid://dx72v53vo3iq2" path="res://Scenes/Ui/TrackSelector/TrackSelector.gd" id="1_hr2aa"]
+[ext_resource type="Texture2D" uid="uid://bw48nm51i6v4h" path="res://Assets/Images/Silverstone.png" id="1_ljhih"]
+[ext_resource type="LabelSettings" uid="uid://qrmcfcpx86yn" path="res://resources/UiLabel32.tres" id="2_ph2ia"]
+[ext_resource type="LabelSettings" uid="uid://djcce1vu1a8pa" path="res://resources/UiLabel22.tres" id="3_hr2aa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iyekk"]
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="TrackSelector" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_iyekk")
+script = ExtResource("1_hr2aa")
+
+[node name="Highlight" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.19607843, 0.3019608, 0.45490196, 1)
+
+[node name="MC" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="TextureRect" type="TextureRect" parent="MC"]
+layout_mode = 2
+texture = ExtResource("1_ljhih")
+expand_mode = 1
+
+[node name="TrackLabel" type="Label" parent="MC"]
+layout_mode = 2
+text = "sdadsadas"
+label_settings = ExtResource("2_ph2ia")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BestLapLabel" type="Label" parent="MC"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Best 00.00s"
+label_settings = ExtResource("3_hr2aa")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

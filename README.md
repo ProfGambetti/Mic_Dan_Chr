@@ -1,2 +1,3 @@
-# Mic_Dan_Chr
-Progetto Godot - primo team - classe 4Ci 2025-2026
+## Super Sprint
+
+This is the start project for the YouTube series remaking (sort of) the C64 classic Super Sprint.

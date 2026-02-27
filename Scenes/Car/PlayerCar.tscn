@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj72m1ivs772h"]
+
+[ext_resource type="PackedScene" uid="uid://cg1mlwxhlujj2" path="res://Scenes/Car/Car.tscn" id="1_6m6i8"]
+[ext_resource type="Script" uid="uid://v30vc21gxpxb" path="res://Scenes/Car/PlayerCar.gd" id="2_3qauk"]
+[ext_resource type="Texture2D" uid="uid://b7wmt1hcagsow" path="res://Assets/Images/CarRed.png" id="3_o4te8"]
+
+[node name="PlayerCar" instance=ExtResource("1_6m6i8")]
+script = ExtResource("2_3qauk")
+max_speed = 380.0
+friction = 300.0
+acceleration = 150.0
+steer_strength = 6.0
+min_steer_factor = 0.5
+car_texture = ExtResource("3_o4te8")
+car_name = "Maisy"
+car_number = 0
+bounce_time = 0.8
+bounce_force = 30.0
+slip_speed_range = Vector2(0.2, 0.5)
