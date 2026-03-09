@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dknnoxlghw3qv"]
+
+[ext_resource type="Script" uid="uid://oucgggvbgo4q" path="res://Scenes/TrackProcessor/TrackProcessor.gd" id="1_gdbed"]
+
+[sub_resource type="Curve" id="Curve_gdbed"]
+_data = [Vector2(0, 0.011235952), 0.0, -0.62320346, 0, 0, Vector2(0.3584906, 0.9101124), 0.38627383, 0.38627383, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="TrackProcessor" type="PathFollow2D"]
+loop = false
+script = ExtResource("1_gdbed")
+radius_curve = SubResource("Curve_gdbed")

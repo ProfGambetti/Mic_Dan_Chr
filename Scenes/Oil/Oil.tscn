@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dh7hlequnhe22"]
+
+[ext_resource type="Script" uid="uid://bn53batlrvhbk" path="res://Scenes/Oil/Oil.gd" id="1_phwcx"]
+[ext_resource type="Texture2D" uid="uid://yyr47gbb1gym" path="res://Assets/Images/Oil.png" id="1_smbwj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_phwcx"]
+radius = 17.029387
+
+[node name="Oil" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_phwcx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_smbwj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_phwcx")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

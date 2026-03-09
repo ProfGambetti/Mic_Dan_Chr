@@ -1,0 +1,132 @@
+[gd_scene load_steps=16 format=3 uid="uid://gqdstw6n42rk"]
+
+[ext_resource type="Script" uid="uid://e256etg8nsqi" path="res://Scenes/Track/Track.gd" id="1_0do6f"]
+[ext_resource type="PackedScene" uid="uid://dknnoxlghw3qv" path="res://Scenes/TrackProcessor/TrackProcessor.tscn" id="5_2lgdg"]
+[ext_resource type="PackedScene" uid="uid://1olejsy54lgw" path="res://Scenes/OilDropper/OilDropper.tscn" id="5_vfgym"]
+[ext_resource type="Texture2D" uid="uid://dec3bup5l0rha" path="res://Assets/Images/FinishLine.png" id="6_wtm8k"]
+[ext_resource type="PackedScene" uid="uid://cg7p815f0b5w3" path="res://Scenes/Verification/Verification.tscn" id="7_6d5m8"]
+[ext_resource type="PackedScene" uid="uid://dj72m1ivs772h" path="res://Scenes/Car/PlayerCar.tscn" id="8_2lgdg"]
+[ext_resource type="PackedScene" uid="uid://b5bx7onudqhnd" path="res://Scenes/RaceController/RaceController.tscn" id="8_pxc04"]
+[ext_resource type="PackedScene" uid="uid://djyaytjfa6yp5" path="res://Scenes/Car/CpuCar.tscn" id="9_iwdkm"]
+[ext_resource type="Texture2D" uid="uid://dr8u06xrl4yv6" path="res://Assets/Images/CarPurple.png" id="10_pptq5"]
+[ext_resource type="Texture2D" uid="uid://dlry4iqrl31mt" path="res://Assets/Images/CarGreen.png" id="11_m1acf"]
+[ext_resource type="Texture2D" uid="uid://pndhsqg7v7iu" path="res://Assets/Images/CarBlue.png" id="12_cc6kv"]
+[ext_resource type="PackedScene" uid="uid://bx0trj8wkc4gu" path="res://Scenes/Countdown/Countdown.tscn" id="14_cc6kv"]
+[ext_resource type="AudioStream" uid="uid://j5ukorijaeag" path="res://Assets/Sounds/8_Bit_Adventure.mp3" id="14_t887p"]
+[ext_resource type="PackedScene" uid="uid://dchx1uyweix8u" path="res://Scenes/Ui/GameUi/GameUi.tscn" id="14_yb8n5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6d5m8"]
+size = Vector2(126.51728, 6.3651505)
+
+[node name="Track" type="Node"]
+script = ExtResource("1_0do6f")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(573, 327)
+scale = Vector2(1.1, 1.1)
+
+[node name="TrackImage" type="Sprite2D" parent="."]
+position = Vector2(575, 326)
+
+[node name="TrackCollision" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="TrackPath" type="Path2D" parent="."]
+position = Vector2(1, 0)
+
+[node name="OilDropper" parent="TrackPath" node_paths=PackedStringArray("oil_container") instance=ExtResource("5_vfgym")]
+position = Vector2(683, 508)
+rotation = 0.3806679
+debug = false
+oil_container = NodePath("../../OilContainer")
+
+[node name="TrackProcessor" parent="TrackPath" instance=ExtResource("5_2lgdg")]
+position = Vector2(683, 508)
+rotation = 0.3806679
+max_path_deviation = 50.0
+
+[node name="OilContainer" type="Node" parent="."]
+
+[node name="StartLine" type="Area2D" parent="."]
+position = Vector2(691, 515)
+rotation = -1.3307519
+collision_layer = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="StartLine"]
+scale = Vector2(1, 0.45)
+texture = ExtResource("6_wtm8k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartLine"]
+position = Vector2(0.088378906, -0.12908936)
+shape = SubResource("RectangleShape2D_6d5m8")
+
+[node name="VerificationsHolder" type="Node" parent="."]
+
+[node name="Verification" parent="VerificationsHolder" instance=ExtResource("7_6d5m8")]
+position = Vector2(775, 416.0001)
+rotation = -0.43016
+
+[node name="Verification2" parent="VerificationsHolder" instance=ExtResource("7_6d5m8")]
+position = Vector2(594, 176)
+rotation = 0.65541977
+
+[node name="Verification3" parent="VerificationsHolder" instance=ExtResource("7_6d5m8")]
+position = Vector2(139.99998, 312)
+rotation = 0.48919514
+
+[node name="CarsHolder" type="Node" parent="."]
+
+[node name="CpuCar" parent="CarsHolder" instance=ExtResource("9_iwdkm")]
+position = Vector2(611, 462)
+car_texture = ExtResource("10_pptq5")
+car_number = 1
+
+[node name="CpuCar2" parent="CarsHolder" instance=ExtResource("9_iwdkm")]
+position = Vector2(662, 478)
+max_top_speed_limit = 340.0
+min_top_speed_limit = 250.0
+car_texture = ExtResource("11_m1acf")
+car_name = "Flossy"
+car_number = 2
+
+[node name="CpuCar3" parent="CarsHolder" instance=ExtResource("9_iwdkm")]
+position = Vector2(646, 529)
+max_top_speed_limit = 340.0
+min_top_speed_limit = 250.0
+car_texture = ExtResource("12_cc6kv")
+car_name = "Fred"
+car_number = 3
+
+[node name="PlayerCar" parent="CarsHolder" instance=ExtResource("8_2lgdg")]
+position = Vector2(589, 508)
+car_name = "jabba"
+car_number = 4
+
+[node name="RaceController" parent="." instance=ExtResource("8_pxc04")]
+total_laps = 3
+
+[node name="RaceOverTimer" type="Timer" parent="RaceController"]
+wait_time = 2.0
+one_shot = true
+
+[node name="WaypointHolder" type="Node" parent="."]
+
+[node name="UiCanvas" type="CanvasLayer" parent="."]
+
+[node name="Countdown" parent="UiCanvas" instance=ExtResource("14_cc6kv")]
+offset_left = -27.0
+offset_top = 18.0
+offset_right = -27.0
+offset_bottom = 18.0
+
+[node name="GameUi" parent="UiCanvas" instance=ExtResource("14_yb8n5")]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_t887p")
+volume_db = -80.0
+autoplay = true
+parameters/looping = false
+
+[connection signal="area_entered" from="TrackCollision" to="." method="_on_track_collision_area_entered"]
+[connection signal="area_entered" from="StartLine" to="." method="_on_start_line_area_entered"]
+[connection signal="timeout" from="RaceController/RaceOverTimer" to="RaceController" method="_on_race_over_timer_timeout"]

@@ -1,0 +1,67 @@
+[gd_scene load_steps=12 format=3 uid="uid://cg1mlwxhlujj2"]
+
+[ext_resource type="Script" uid="uid://d05mj37dfkbvv" path="res://Scenes/Car/Car.gd" id="1_6tdsx"]
+[ext_resource type="Texture2D" uid="uid://b7wmt1hcagsow" path="res://Assets/Images/CarRed.png" id="1_fnsqd"]
+[ext_resource type="Texture2D" uid="uid://blv5vu5ryjp8t" path="res://Assets/Images/Dot.png" id="3_a0hww"]
+[ext_resource type="AudioStream" uid="uid://dod4318pu05ns" path="res://Assets/Sounds/519073_8-bit-car-engine.wav" id="4_dfrl7"]
+[ext_resource type="AudioStream" uid="uid://d2v8miyjgh6m7" path="res://Assets/Sounds/275903_crash02.wav" id="5_asnge"]
+[ext_resource type="AudioStream" uid="uid://bbl8wdfnjjl0j" path="res://Assets/Sounds/391669__jeckkech__crash.wav" id="6_0xp4x"]
+[ext_resource type="AudioStream" uid="uid://wfbamkpxl5g4" path="res://Assets/Sounds/273478_spin-01.wav" id="7_vlo0y"]
+[ext_resource type="AudioStream" uid="uid://cio1nqbwe0xw0" path="res://Assets/Sounds/277214_8-bit-powerup-get-something-big.wav" id="8_rylaw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fnsqd"]
+radius = 7.0
+height = 28.0
+
+[sub_resource type="Curve" id="Curve_sbu84"]
+_data = [Vector2(0, 0.4975062), 0.0, 0.0, 0, 0, Vector2(0.6168224, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5pvvf"]
+streams_count = 3
+stream_0/stream = ExtResource("5_asnge")
+stream_1/stream = ExtResource("6_0xp4x")
+stream_2/stream = ExtResource("7_vlo0y")
+
+[node name="Car" type="Area2D"]
+script = ExtResource("1_6tdsx")
+
+[node name="CarSprite" type="Sprite2D" parent="."]
+position = Vector2(-1, 1)
+rotation = 1.5707964
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_fnsqd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_fnsqd")
+
+[node name="CrashEffect" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 32
+texture = ExtResource("3_a0hww")
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.76
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 50.0
+orbit_velocity_min = -2.0
+orbit_velocity_max = 2.0
+radial_accel_min = 40.0
+radial_accel_max = 80.0
+scale_amount_min = 0.01
+scale_amount_max = 0.03
+scale_amount_curve = SubResource("Curve_sbu84")
+color = Color(1, 0.5137255, 0.2509804, 1)
+
+[node name="EngineSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_dfrl7")
+volume_db = -6.0
+
+[node name="CrashSound" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_5pvvf")
+
+[node name="LapSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_rylaw")
