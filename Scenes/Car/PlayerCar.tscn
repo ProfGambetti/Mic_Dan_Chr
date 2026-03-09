@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dj72m1ivs772h"]
+
+[ext_resource type="PackedScene" uid="uid://cg1mlwxhlujj2" path="res://Scenes/Car/Car.tscn" id="1_6m6i8"]
+[ext_resource type="Script" uid="uid://v30vc21gxpxb" path="res://Scenes/Car/PlayerCar.gd" id="2_3qauk"]
+
+[node name="PlayerCar" instance=ExtResource("1_6m6i8")]
+script = ExtResource("2_3qauk")
+max_speed = 380.0
+friction = 300.0
+acceleration = 150.0
+steer_strength = 6.0
+min_steer_factor = 0.5
+boost_speed = 480.0
+boost_duration = 2.0
+boost_cooldown = 6.0
